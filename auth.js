@@ -1,4 +1,0 @@
-import {auth} from "./firebase-init.js";import {ADMIN_EMAIL} from "./firebase-config.js";import {signInWithEmailAndPassword,onAuthStateChanged,signOut} from "https://www.gstatic.com/firebasejs/12.2.1/firebase-auth.js";
-const form=document.querySelector("#loginForm"),status=document.querySelector("#status");
-onAuthStateChanged(auth,u=>{if(u&&u.email?.toLowerCase()===ADMIN_EMAIL.toLowerCase())location.href="dashboard.html";});
-form.addEventListener("submit",async e=>{e.preventDefault();status.textContent="Signing in…";try{const u=(await signInWithEmailAndPassword(auth,email.value,password.value)).user;if(u.email?.toLowerCase()!==ADMIN_EMAIL.toLowerCase()){await signOut(auth);throw Error("Not the authorized admin account.");}location.href="dashboard.html";}catch(x){status.textContent=x.message;}});
