@@ -1,0 +1,14 @@
+rules_version = '2';
+service cloud.firestore {
+ match /databases/{database}/documents {
+  match /analyticsEvents/{id} {
+   allow create: if request.auth != null
+     && request.auth.token.firebase.sign_in_provider == "anonymous"
+     && request.resource.data.type is string;
+   allow read: if request.auth != null
+     && request.auth.token.email == "YOUR_ADMIN_EMAIL@example.com";
+   allow update, delete: if false;
+  }
+  match /{document=**} { allow read, write: if false; }
+ }
+}
